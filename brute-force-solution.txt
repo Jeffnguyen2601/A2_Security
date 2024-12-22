@@ -1,0 +1,44 @@
+let loginAttempts = 0; // Track failed login attempts
+const maxAttempts = 5; // Maximum allowed attempts
+const lockoutDuration = 15 * 60 * 1000; // Lockout duration in milliseconds (15 minutes)
+let lockoutUntil = null; // Timestamp when lockout expires
+
+document.getElementById('login-btn').addEventListener('click', function () {
+    // Check if the user is currently locked out
+    if (lockoutUntil && Date.now() < lockoutUntil) {
+        const remainingTime = Math.ceil((lockoutUntil - Date.now()) / 1000);
+        document.getElementById('auth-message').innerText =
+            `Too many failed attempts. Please wait ${remainingTime} seconds.`;
+        return;
+    }
+
+    // Get username and password from input fields
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+
+    // Reset lockout if user can retry
+    if (lockoutUntil && Date.now() >= lockoutUntil) {
+        loginAttempts = 0; // Reset attempts after lockout expires
+        lockoutUntil = null;
+    }
+
+    // Simulated correct credentials
+    const correctUsername = 'admin';
+    const correctPassword = 'password123';
+
+    // Check if the credentials are correct
+    if (username === correctUsername && password === correctPassword) {
+        document.getElementById('auth-message').innerText = 'Login successful!';
+        loginAttempts = 0; // Reset attempts on successful login
+    } else {
+        loginAttempts++; // Increment failed attempts
+        document.getElementById('auth-message').innerText = 'Invalid username or password!';
+
+        // Check if the max attempts have been reached
+        if (loginAttempts >= maxAttempts) {
+            lockoutUntil = Date.now() + lockoutDuration; // Set lockout timer
+            document.getElementById('auth-message').innerText =
+                `Too many failed attempts. Please wait 15 minutes.`;
+        }
+    }
+});

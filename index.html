@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"> <!-- Character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design settings -->
+    <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file for styling -->
+    <title>Document</title> <!-- Title of the document -->
+</head>
+
+<body>
+    <div id="login-form" class="auth-container">
+        <h2>Login</h2>
+        <input type="text" id="login-username" placeholder="Enter username">
+        <input type="password" id="login-password" placeholder="Enter password">
+        <button id="login-btn">Login</button>
+    </div>
+    
+    <div class="auth-status">
+        <h3 id="auth-message"></h3>
+    </div>
+    
+
+    <div class="web"> <!-- Main container for the web content -->
+        <div class="head"> <!-- Header section -->
+            <h1>my market</h1> <!-- Main title -->
+        </div>
+        <div class="inputs"> <!-- Container for input elements -->
+            <div class="filters">
+                <input type="search" id="search" placeholder="Search for products..."> <!-- Ô tìm kiếm -->
+                <button id="search-btn">Search</button> <!-- Nút riêng cho tìm kiếm -->
+            
+                <select name="categories" id="categories">
+                    <option value="" disabled selected>All Categories</option>
+                    <option id="cat1" value="men's clothing">men's clothing</option>
+                    <option id="cat2" value="jewelery">jewelery</option>
+                    <option id="cat3" value="electronics">electronics</option>
+                    <option id="cat4" value="women's clothing">women's clothing</option>
+                </select>
+                <input type="number" id="minPrice" placeholder="min price">
+                <input type="number" id="maxPrice" placeholder="max price">
+                <select name="Sort" id="sort">
+                    <option value="" disabled selected>Sort by...</option>
+                    <option id="sortPrice" value="price-asc">low-to-high price</option>
+                    <option id="sortPrice" value="price-desc">high-to-low price</option>
+                    <option id="sortRating" value="rating-asc">low-to-high rating</option>
+                    <option id="sortRating" value="rating-desc">high-to-low rating</option>
+                </select>
+                <button id="apply">Apply Filters</button> <!-- Nút riêng cho bộ lọc -->
+            </div>
+            
+            <div class="cart"> <!-- Shopping cart section -->
+                <h3>Shopping Cart</h3> <!-- Cart title -->
+                <ul id="cart"> <!-- Unordered list to display cart items -->
+                </ul>
+            </div>
+            <small id="totalQ"></small> <!-- Element to display total quantity of items in the cart -->
+            <small id="totalP"></small> <!-- Element to display total price of items in the cart -->
+        </div>
+        <div class="outputs"> <!-- Container for displaying product outputs -->
+        </div>
+        <div class="pagination"></div> <!-- Pagination controls for navigating product pages -->
+
+        <script src="main.js"></script> <!-- Link to the external JavaScript file for functionality -->
+    </div>
+</body>
+
+</html>
